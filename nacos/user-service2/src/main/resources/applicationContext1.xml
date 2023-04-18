@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+<!--    name别名 scope是否为单例，默认单例 prototype不为单例 init-method初始化方法，destroy-method-->
+<!--    new方法创建-->
+<!--    <bean id="B" class="cn.itcast.user.web.B" name="b1 b2" scope="prototype"></bean>-->
+<!--    工厂模式创建-->
+<!--    <bean id="B" class="cn.itcast.user.web.bFactory" name="b1 b2" scope="prototype" factory-method="getB"></bean>-->
+
+<!--    factoryBean实例化bean-->
+<!--    <bean id="B" class="cn.itcast.user.web.bFactoryBean"></bean>-->
+
+    <context:property-placeholder location="classpath*:jdbc.properties,"/>
+    <bean id="B" class="${jdbc.password}"></bean>
+    <bean id="abc" class="${jdbc.username}" >
+        <property name="b" ref="B"></property>
+    </bean>
+<!--    <bean id="A" class="cn.itcast.user.web.A" autowire="byType">-->
+<!--&lt;!&ndash;        通过Bean配置属性A中属性&ndash;&gt;-->
+<!--&lt;!&ndash;        <property name="b" ref="B"></property>&ndash;&gt;-->
+<!--&lt;!&ndash;        <property name="num" value="10"></property>&ndash;&gt;-->
+<!--        <property name="database" value="${jdbc.username}"></property>-->
+<!--&lt;!&ndash;        构造器注入，name为变量名 ,index 为参数位置 ,type为参数类型,选其一来指定参数注入&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg name="b" ref="B"></constructor-arg>&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg name="database" value="mysql"></constructor-arg>&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg name="num" value="10"></constructor-arg>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        array,list,set,map,properties&ndash;&gt;-->
+<!--&lt;!&ndash;        <property name="list">&ndash;&gt;-->
+<!--&lt;!&ndash;            <list>&ndash;&gt;-->
+<!--&lt;!&ndash;                <value>abc</value>&ndash;&gt;-->
+<!--&lt;!&ndash;                <value>def</value>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <ref bean=""></ref>&ndash;&gt;-->
+<!--&lt;!&ndash;            </list>&ndash;&gt;-->
+<!--&lt;!&ndash;        </property>&ndash;&gt;-->
+<!--    </bean>-->
+<!--    <bean id="mysql" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+<!--        <property name="user" value="${jdbc.username}"></property>-->
+<!--        <property name="password" value="${jdbc.password}"></property>-->
+<!--        <property name="driverClass" value="${jdbc.drive}"/>-->
+<!--        <property name="jdbcUrl" value="${jdbc.url}"/>-->
+<!--    </bean>-->
+    <context:component-scan base-package="cn.itcast.user.web"/>
+</beans>

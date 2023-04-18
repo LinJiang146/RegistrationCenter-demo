@@ -1,0 +1,18 @@
+
+server:
+  port: 12000
+spring:
+  application:
+    name: service_customer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:13000/eureka,http://localhost:13001/eureka
+
+  server:
+    enable-self-preservation: false
+  instance:
+#    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 30
+
